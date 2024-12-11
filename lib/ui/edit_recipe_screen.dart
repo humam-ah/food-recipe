@@ -40,9 +40,12 @@ class _EditRecipeScreenState extends State<EditRecipeScreen> {
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.initialTitle);
-    _descriptionController = TextEditingController(text: widget.initialDescription);
-    _cookingMethodController = TextEditingController(text: widget.initialCookingMethod);
-    _ingredientsController = TextEditingController(text: widget.initialIngredients);
+    _descriptionController =
+        TextEditingController(text: widget.initialDescription);
+    _cookingMethodController =
+        TextEditingController(text: widget.initialCookingMethod);
+    _ingredientsController =
+        TextEditingController(text: widget.initialIngredients);
   }
 
   Future<void> _pickImage() async {
@@ -69,14 +72,15 @@ class _EditRecipeScreenState extends State<EditRecipeScreen> {
         description: _descriptionController.text,
         cookingMethod: _cookingMethodController.text,
         ingredients: _ingredientsController.text,
-        photoPath: _selectedImage?.path ?? '',
+        photoPath: _selectedImage?.path ??
+            '', // Jika gambar tidak dipilih, kirimkan string kosong
       );
 
       if (success) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Recipe updated successfully')),
         );
-        Navigator.pop(context, true);
+        Navigator.pop(context, true); // Kembali ke halaman sebelumnya
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Failed to update recipe')),
@@ -109,29 +113,34 @@ class _EditRecipeScreenState extends State<EditRecipeScreen> {
               children: [
                 TextFormField(
                   controller: _titleController,
-                  validator: (value) =>
-                      value == null || value.isEmpty ? 'Please enter the title' : null,
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Please enter the title'
+                      : null,
                   decoration: const InputDecoration(labelText: 'Title'),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _descriptionController,
-                  validator: (value) =>
-                      value == null || value.isEmpty ? 'Please enter the description' : null,
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Please enter the description'
+                      : null,
                   decoration: const InputDecoration(labelText: 'Description'),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _cookingMethodController,
-                  validator: (value) =>
-                      value == null || value.isEmpty ? 'Please enter the cooking method' : null,
-                  decoration: const InputDecoration(labelText: 'Cooking Method'),
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Please enter the cooking method'
+                      : null,
+                  decoration:
+                      const InputDecoration(labelText: 'Cooking Method'),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _ingredientsController,
-                  validator: (value) =>
-                      value == null || value.isEmpty ? 'Please enter the ingredients' : null,
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Please enter the ingredients'
+                      : null,
                   decoration: const InputDecoration(labelText: 'Ingredients'),
                 ),
                 const SizedBox(height: 16),

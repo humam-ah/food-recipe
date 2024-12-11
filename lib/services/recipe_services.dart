@@ -38,7 +38,7 @@ class RecipeService {
     required String description,
     required String cookingMethod,
     required String ingredients,
-    required String photoPath,
+    required String photoPath, // Perhatikan parameter ini
   }) async {
     final token = await _sessionService.getToken();
     if (token == null || token.isEmpty) {
@@ -56,11 +56,16 @@ class RecipeService {
     request.fields['cooking_method'] = cookingMethod;
     request.fields['ingredients'] = ingredients;
 
+    // Pastikan untuk mengecek apakah photoPath kosong atau tidak
     if (photoPath.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath('photo', photoPath));
     }
 
     final response = await request.send();
+
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${await response.stream.bytesToString()}');
+
     return response.statusCode == 201;
   }
 
@@ -71,7 +76,7 @@ class RecipeService {
     required String description,
     required String cookingMethod,
     required String ingredients,
-    required String photoPath,
+    required String photoPath, // Perhatikan parameter ini
   }) async {
     final token = await _sessionService.getToken();
     if (token == null || token.isEmpty) {
@@ -89,11 +94,16 @@ class RecipeService {
     request.fields['cooking_method'] = cookingMethod;
     request.fields['ingredients'] = ingredients;
 
+    // Pastikan untuk mengecek apakah photoPath kosong atau tidak
     if (photoPath.isNotEmpty) {
       request.files.add(await http.MultipartFile.fromPath('photo', photoPath));
     }
 
     final response = await request.send();
+
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${await response.stream.bytesToString()}');
+
     return response.statusCode == 200;
   }
 

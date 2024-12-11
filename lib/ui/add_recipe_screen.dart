@@ -40,11 +40,13 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
           description: description,
           cookingMethod: cookingMethod,
           ingredients: ingredients,
-          photoPath: _selectedImage?.path ?? '', 
+          photoPath: _selectedImage?.path ??
+              '', // Jika gambar tidak ada, kirimkan string kosong
         );
 
         if (success) {
-          Navigator.pop(context, true); 
+          Navigator.pop(
+              context, true); // Jika sukses, kembali ke halaman sebelumnya
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to add recipe')),
@@ -89,8 +91,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                       value!.isEmpty ? 'Please enter cooking method' : null,
                 ),
                 TextFormField(
-                  decoration:
-                      const InputDecoration(labelText: 'Ingredients'),
+                  decoration: const InputDecoration(labelText: 'Ingredients'),
                   onSaved: (value) => ingredients = value!,
                   validator: (value) =>
                       value!.isEmpty ? 'Please enter ingredients' : null,
